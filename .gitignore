@@ -1,0 +1,21 @@
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Temporary & build scripts
+*.py
+check_chips.py
+diagnose_projects.py
+verify_projects.py
+audit_all_svgs.py
+deep_audit.py
+sync_and_zip.py
+generate_*.py
+fix_*.py
+update_*.py
+
+# Notes & system files
+PACKAGE_NOTES.txt
+.DS_Store
+Thumbs.db
