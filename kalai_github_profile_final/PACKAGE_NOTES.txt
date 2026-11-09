@@ -1,0 +1,62 @@
+PROFILE PACKAGE NOTES — COSMIC AURORA THEME
+=====================================================
+
+Designed in full compliance with the GitHub Profile Playbook to attract recruiters and technical hiring managers.
+
+Target Repository:
+Upload README.md and the entire assets/ directory to the root of your public
+GitHub repository named `kalaiarashisb` (matching your username).
+
+Files Included:
+- assets/hero.svg:
+  * Animated greeting with blinking cursor
+  * Display typography for KALAIARASHI S B
+  * 4 Cycling roles (16s SMIL loop): Full Stack Developer, AI/ML Enthusiast, Java & Spring Developer, Software Engineer
+  * Recruiter-attracting live status pill ("🟢 Open to Opportunities")
+  * Embedded stylized portrait (id.png) in glowing hairline frame
+
+- assets/about-life.svg:
+  * Core capabilities in a 2x2 grid of styled badges (Application Engineering, AI/ML, Data Pipelines, Algorithmic Problem Solving)
+  * 3-slide interests carousel with synchronized segment progress bars (12s SMIL loop)
+
+- assets/stack.svg:
+  * 3 tilted elliptical orbits with central glowing star core
+  * 4 labeled planetary nodes featuring official vector brand logos (Python, Java, React, AI/Neural Chip)
+  * 5 categorized groups of styled stack chips (Languages, AI/ML, Frameworks, Data, Tools)
+
+- assets/skills-matrix.svg:
+  * Complete categorized technical competency card replacing plain markdown tables
+  * 7 technical domains: Programming Languages, AI & ML, Generative AI & Agents, Full Stack & Backend, Data Science & Pipelines, Databases & Storage, Developer Tools & DevOps
+  * 35+ styled proficiency chips in glowing glassmorphic Cosmic Aurora containers
+
+- assets/projects.svg:
+  * Dual-column flagship project showcase with macOS terminal explorer header
+  * Card 1: 🌱 DailySprout (Gamified AI learning platform with LLaMA & Groq API, personalized roadmaps, and diagnostics)
+  * Card 2: ♿ EchoTouch (Accessible AI digital payment platform with tactile V-Braille, haptic engine, and Spring Boot)
+  * Pulsing status lights, categorized tech stack chips, and impact metric strips
+
+- assets/id-dashboard.svg:
+  * Hanging lanyard ID badge with metal clasp and gentle +/-1.7-degree pendulum swing
+  * Subtle animated foil / light sweep sheen across the card
+  * Fully centered barcode strip and verified credentials
+  * Engineering metrics dashboard: Core technical focus, featured project deliverables, and verified hiring availability
+
+- assets/connect.svg:
+  * Pointing character (right_pointing.png) on the left
+  * Generously spaced social cards on the right (GitHub, LinkedIn, Open to Opportunities)
+  * Animated nudging arrows indicating action
+
+- clay_robot.html:
+  * Standalone, zero-dependency 3D WebGL2 Raymarched Clay Robot (Originkit engine)
+  * Interactive cursor gaze tracking, procedural walking waddle along the floor, jump/hop on tap, wave animations, and soft SDF raymarched shadows
+  * Cosmic Lilac (#B5A1FF) theme matching the profile palette
+
+- preview.html:
+  * Full browser preview of the complete GitHub profile with the embedded live 3D Clay Robot canvas
+
+- Source Character Assets:
+  * assets/id.png (855x900 RGBA with transparent background preserved)
+  * assets/right_pointing.png (900x843 RGBA with transparent background preserved)
+
+All SVGs are 100% self-contained with embedded data URIs, valid XML, and standard SMIL animations.
+An upload-ready ZIP is provided: kalaiarashisb_github_profile_ready.zip
