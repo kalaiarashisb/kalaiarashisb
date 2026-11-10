@@ -26,10 +26,4 @@
 [![3D Clay Robot Companion](https://img.shields.io/badge/🤖_3D_Clay_Robot-Launch_Live_Companion-d52cb8?style=for-the-badge&logo=webgl&logoColor=white)](clay_robot.html)
 [![Live Portfolio Preview](https://img.shields.io/badge/🌐_Profile_Preview-View_Interactive_Portfolio-22c55e?style=for-the-badge&logo=googlechrome&logoColor=white)](preview.html)
 
-<br>
-
-<sub>Open to Full-Time Software Engineering Roles, Summer Internships &amp; Technical Collaborations.</sub>
-
-<sub>Crafted with the Cosmic Aurora Theme · High-Performance Full-Stack &amp; Applied AI Engineering.</sub>
-
 </div>
