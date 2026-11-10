@@ -7,191 +7,330 @@
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     padding: 0;
-    background: #0d1117;
-    color: #c9d1d9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #08091a;
+    color: #f8f4ff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
+    overflow-x: hidden;
   }
-  main {
-    max-width: 1040px;
-    margin: 36px auto;
-    padding: 28px;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 8px;
+
+  /* Floating Cosmic Aurora Navigation Bar */
+  .aurora-nav-wrapper {
+    position: sticky;
+    top: 14px;
+    z-index: 1000;
+    max-width: 1100px;
+    margin: 0 auto 16px;
+    padding: 0 16px;
   }
-  header {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    color: #8b949e;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    border-bottom: 1px solid #21262d;
-    padding-bottom: 12px;
+  .aurora-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: rgba(12, 9, 34, 0.90);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1.4px solid #5e397c;
+    border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(121, 40, 202, 0.18);
+    gap: 10px;
   }
-  header a.launch-btn {
-    background: #1f1238;
-    color: #c6a6f4;
-    border: 1px solid #7928ca;
-    padding: 4px 12px;
-    border-radius: 12px;
+  .nav-pills {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-pills::-webkit-scrollbar { display: none; }
+  .nav-pill {
+    background: transparent;
+    color: #c4b5d9;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-pill:hover {
+    color: #fff;
+    background: rgba(121, 40, 202, 0.25);
+    border-color: #7928ca;
+  }
+  .nav-pill.active {
+    color: #fff;
+    background: linear-gradient(135deg, #7928ca, #d52cb8);
+    border-color: #efa1df;
+    box-shadow: 0 0 14px rgba(213, 44, 184, 0.45);
+  }
+  .view-mode-toggle {
+    background: #1e133d;
+    color: #efa1df;
+    border: 1px solid #7928ca;
+    padding: 6px 14px;
+    border-radius: 20px;
     font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: all 0.25s ease;
   }
-  header a.launch-btn:hover {
+  .view-mode-toggle:hover {
+    background: #7928ca;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(121, 40, 202, 0.4);
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+    padding: 0 16px;
+  }
+
+  /* Slider Controls Bar (Visible in Slider Mode) */
+  .slider-controls-bar {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: #140c2c;
+    border: 1.4px solid #5e397c;
+    border-radius: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .slider-btn {
+    background: #1f1238;
+    color: #f8f4ff;
+    border: 1px solid #7928ca;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .slider-btn:hover:not(:disabled) {
     background: #7928ca;
     color: #fff;
   }
-  img.card {
+  .slider-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .slider-status {
+    text-align: center;
+  }
+  .slider-status-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #efa1df;
+    letter-spacing: 0.5px;
+  }
+  .slider-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3e2659;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .slider-dot.active {
+    background: #efa1df;
+    box-shadow: 0 0 8px #d52cb8;
+    width: 22px;
+    border-radius: 6px;
+  }
+
+  /* Cards Container */
+  .cards-stack {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Single Card Item */
+  .profile-card-item {
+    margin-bottom: 26px;
+    border-radius: 26px;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, opacity 0.4s ease;
+  }
+  .profile-card-item img.card {
     display: block;
     width: 100%;
     height: auto;
-    margin: 24px 0;
-    border-radius: 12px;
+    border-radius: 26px;
   }
-  h2 {
-    font-size: 22px;
-    border-bottom: 1px solid #21262d;
-    padding-bottom: 8px;
-    margin-top: 36px;
-    color: #f0f6fc;
-  }
-  a {
-    color: #58a6ff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  hr {
-    border: 0;
-    border-top: 1px solid #21262d;
-    margin: 28px 0;
-  }
-  .center {
-    text-align: center;
-  }
-  .badges {
-    margin: 12px 0 20px;
-  }
-  .badges a {
-    margin: 0 4px;
-    display: inline-block;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 20px 0;
-    font-size: 14.5px;
-  }
-  table th, table td {
-    border: 1px solid #30363d;
-    padding: 12px 16px;
-    text-align: left;
-    vertical-align: top;
-  }
-  table th {
-    background: #161b22;
-    color: #f0f6fc;
-    font-weight: 600;
-  }
-  table tr:nth-child(even) {
-    background: #161b22;
-  }
-  code {
-    background: #1f242c;
-    color: #f0883e;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    margin: 0 2px;
-    display: inline-block;
-  }
-  details {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin: 20px 0;
-  }
-  summary {
-    cursor: pointer;
-    color: #f0f6fc;
-    font-weight: 600;
+  .profile-card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 44px rgba(121, 40, 202, 0.25);
   }
 
-  /* Interactive Robot Section */
-  .robot-showcase {
-    background: #0f0a26;
-    border: 1px solid #5e397c;
-    border-radius: 16px;
-    padding: 20px;
-    margin: 24px 0;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  /* In Slider Mode */
+  .cards-stack.is-slider {
+    min-height: 600px;
   }
-  .robot-showcase-header {
+  .cards-stack.is-slider .profile-card-item {
+    display: none;
+    margin-bottom: 0;
+  }
+  .cards-stack.is-slider .profile-card-item.is-active {
+    display: block;
+    animation: cardSlideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes cardSlideFade {
+    from { opacity: 0; transform: translateY(14px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* 3D Robot Card Frame (Identical to 1100px SVG Cards) */
+  .robot-card {
+    background: linear-gradient(135deg, #0c0922 0%, #140c2c 50%, #070515 100%);
+    border: 2px solid #5e397c;
+    border-radius: 26px;
+    padding: 24px 28px;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  .robot-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#7948a8 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+  .robot-card-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
+    padding-bottom: 14px;
+    border-bottom: 1.2px solid #4a2e69;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .mac-dots {
+    display: flex;
     gap: 8px;
   }
-  .robot-showcase-title {
+  .mac-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+  .robot-card-category {
+    color: #efa1df;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .robot-status-pill {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #c6a6f4;
+    color: #86efac;
+    font-size: 11px;
     font-weight: 700;
-    font-size: 13.5px;
     letter-spacing: 1px;
-    text-transform: uppercase;
   }
   .pulse-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     background: #22c55e;
     border-radius: 50%;
     box-shadow: 0 0 8px #22c55e;
     display: inline-block;
   }
+  .robot-header-desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .robot-title-group h3 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #f8f4ff;
+  }
+  .robot-title-group p {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #c6a6f4;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
   .robot-actions {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
   }
   .action-btn {
     background: #1c133a;
     color: #f8f4ff;
     border: 1px solid #7928ca;
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 14px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
   }
   .action-btn:hover {
     background: #7928ca;
+    box-shadow: 0 0 10px rgba(121, 40, 202, 0.5);
   }
   .robot-host-box {
     position: relative;
     width: 100%;
-    height: 480px;
-    border-radius: 12px;
+    height: 440px;
+    border-radius: 18px;
     overflow: hidden;
     background: linear-gradient(180deg, #100c28 0%, #1c1445 60%, #060412 100%);
-    cursor: pointer;
+    border: 1px solid #37326b;
+    cursor: grab;
+    margin-bottom: 16px;
+    z-index: 2;
   }
+  .robot-host-box:active { cursor: grabbing; }
   .robot-host-box canvas {
     position: absolute;
     inset: 0;
@@ -199,67 +338,208 @@
     height: 100%;
     display: block;
   }
-  .robot-caption {
+  .robot-chips-row {
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+  .tech-chip {
+    background: #1c1335;
+    border: 1px solid #7928ca;
+    color: #f8f4ff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .robot-metric-strip {
+    background: #140a2a;
+    border: 1.1px solid #482766;
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
     align-items: center;
-    font-size: 11.5px;
-    color: #a89ec4;
-    margin-top: 10px;
+    gap: 10px;
+    font-size: 11px;
+    position: relative;
+    z-index: 2;
+  }
+  .metric-lbl {
+    color: #86efac;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .metric-val {
+    color: #f8f4ff;
+  }
+
+  /* Bottom Actions & Footer */
+  .center { text-align: center; }
+  .badges {
+    margin: 28px 0 32px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .badges a { display: inline-block; }
+  .footer-sub {
+    font-size: 12px;
+    color: #a493bf;
+    margin-top: 14px;
+    line-height: 1.6;
   }
 
   @media (max-width: 768px) {
-    main { padding: 14px; margin: 10px; }
-    table { font-size: 13px; }
-    .robot-host-box { height: 340px; }
+    .aurora-nav { flex-direction: column; gap: 8px; }
+    .robot-host-box { height: 320px; }
+    .robot-header-desc { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
+
+<!-- Floating Cosmic Aurora Navigation Pill Bar -->
+<div class="aurora-nav-wrapper">
+  <nav class="aurora-nav">
+    <div class="nav-pills" id="navPills">
+      <button class="nav-pill active" data-target="0">✨ Hero</button>
+      <button class="nav-pill" data-target="1">👤 About</button>
+      <button class="nav-pill" data-target="2">🌌 Constellation</button>
+      <button class="nav-pill" data-target="3">📊 Skill Matrix</button>
+      <button class="nav-pill" data-target="4">🚀 Projects</button>
+      <button class="nav-pill" data-target="5">🤖 3D Robot</button>
+      <button class="nav-pill" data-target="6">🪪 ID Badge</button>
+      <button class="nav-pill" data-target="7">📬 Connect</button>
+    </div>
+    <button class="view-mode-toggle" id="viewModeToggle">
+      <span id="viewModeIcon">🎴</span>
+      <span id="viewModeLabel">Switch to Slider View</span>
+    </button>
+  </nav>
+</div>
+
 <main>
-  <header>
-    <span>GitHub Profile Live Preview · Cosmic Aurora Theme (kalaiarashisb)</span>
-    <a class="launch-btn" href="clay_robot.html" target="_blank">🎮 Fullscreen 3D Robot ↗</a>
-  </header>
-
-  <div class="center">
-    <img class="card" src="assets/hero.svg?v=3" alt="Kalaiarashi S B — Hero Introduction">
-    <img class="card" src="assets/about-life.svg?v=3" alt="About Me &amp; Philosophy">
-    <img class="card" src="assets/stack.svg?v=3" alt="Technology Constellation">
-    <img class="card" src="assets/skills-matrix.svg?v=3" alt="Complete Technical Skill Matrix">
-    <img class="card" src="assets/projects.svg?v=3" alt="Featured Engineering Deliverables">
-    <img class="card" src="assets/id-dashboard.svg?v=3" alt="Identity &amp; Verification Dashboard">
-    <img class="card" src="assets/connect.svg?v=3" alt="Let's Connect &amp; Collaborate">
+  <!-- Slider Controls (Visible only in Slider Mode) -->
+  <div class="slider-controls-bar" id="sliderControlsBar">
+    <button class="slider-btn" id="btnPrevCard">❮ Previous</button>
+    <div class="slider-status">
+      <div class="slider-status-title" id="sliderStatusTitle">Card 1 of 8: Hero Introduction</div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+    <button class="slider-btn" id="btnNextCard">Next ❯</button>
   </div>
 
-  <!-- Interactive 3D WebGL Clay Robot Showcase -->
-  <div class="robot-showcase">
-    <div class="robot-showcase-header">
-      <div class="robot-showcase-title">
-        <span class="pulse-dot"></span>
-        <span>Interactive 3D Clay Robot Companion · Originkit WebGL2 Raymarching</span>
+  <!-- Cards Stack Container -->
+  <div class="cards-stack" id="cardsStack">
+
+    <!-- Card 0: Hero -->
+    <section class="profile-card-item is-active" id="card-hero" data-index="0" data-title="Hero Introduction">
+      <img class="card" src="assets/hero.svg?v=3" alt="Kalaiarashi S B — Hero Introduction">
+    </section>
+
+    <!-- Card 1: About -->
+    <section class="profile-card-item" id="card-about" data-index="1" data-title="About &amp; Core Capabilities">
+      <img class="card" src="assets/about-life.svg?v=3" alt="About Me &amp; Philosophy">
+    </section>
+
+    <!-- Card 2: Stack -->
+    <section class="profile-card-item" id="card-stack" data-index="2" data-title="Technology Constellation">
+      <img class="card" src="assets/stack.svg?v=3" alt="Technology Constellation">
+    </section>
+
+    <!-- Card 3: Skills Matrix -->
+    <section class="profile-card-item" id="card-skills" data-index="3" data-title="Technical Skill Matrix">
+      <img class="card" src="assets/skills-matrix.svg?v=3" alt="Complete Technical Skill Matrix">
+    </section>
+
+    <!-- Card 4: Featured Projects -->
+    <section class="profile-card-item" id="card-projects" data-index="4" data-title="Featured Engineering Deliverables">
+      <img class="card" src="assets/projects.svg?v=3" alt="Featured Engineering Deliverables">
+    </section>
+
+    <!-- Card 5: Interactive 3D Clay Robot Companion (Placed directly next to projects!) -->
+    <section class="profile-card-item" id="card-robot" data-index="5" data-title="Interactive 3D Robot Companion">
+      <div class="robot-card">
+        <!-- Top Window Header -->
+        <div class="robot-card-top-bar">
+          <div class="mac-dots">
+            <span class="mac-dot dot-red"></span>
+            <span class="mac-dot dot-yellow"></span>
+            <span class="mac-dot dot-green"></span>
+          </div>
+          <span class="robot-card-category">FEATURED INTERACTIVE DELIVERABLE · 3D COMPANION</span>
+          <div class="robot-status-pill">
+            <span class="pulse-dot"></span>
+            <span>WEBGL2 RAYMARCHING · 60 FPS</span>
+          </div>
+        </div>
+
+        <!-- Header Description & Controls -->
+        <div class="robot-header-desc">
+          <div class="robot-title-group">
+            <h3>🤖 3D Clay Robot Companion</h3>
+            <p>Live AI companion for DailySprout · Procedural SDF raymarching &amp; gaze tracking</p>
+          </div>
+          <div class="robot-actions">
+            <button class="action-btn" id="btnHop">🐰 Tap to Hop</button>
+            <button class="action-btn" id="btnWave">👋 Wave Hello</button>
+            <button class="action-btn" id="btnReset">🔄 Center / Home</button>
+            <a class="action-btn" href="clay_robot.html" target="_blank">🎮 Dedicated Tab ↗</a>
+          </div>
+        </div>
+
+        <!-- 3D Raymarched Interactive Canvas -->
+        <div class="robot-host-box" id="robotHost">
+          <canvas id="robotCanvas"></canvas>
+        </div>
+
+        <!-- Tech Stack Chips -->
+        <div class="robot-chips-row">
+          <span class="tech-chip">WebGL2</span>
+          <span class="tech-chip">SDF Raymarching</span>
+          <span class="tech-chip">Spring Physics</span>
+          <span class="tech-chip">Gaze Tracking</span>
+          <span class="tech-chip">Procedural Gait</span>
+          <span class="tech-chip">Soft Shadows</span>
+          <span class="tech-chip">Zero Dependencies</span>
+        </div>
+
+        <!-- Metric Footer Strip -->
+        <div class="robot-metric-strip">
+          <span class="metric-lbl"><span class="pulse-dot"></span>CORE METRIC:</span>
+          <span class="metric-val">Procedural Raymarching · Real-Time Companion Kinematics · Interactive Cursor Gaze &amp; Floor Waddle</span>
+        </div>
       </div>
-      <div class="robot-actions">
-        <button class="action-btn" id="btnHop">🐰 Hop</button>
-        <button class="action-btn" id="btnWave">👋 Wave</button>
-        <a class="action-btn" href="clay_robot.html" target="_blank" style="text-decoration:none;">↗ Open Dedicated Tab</a>
-      </div>
-    </div>
-    <div class="robot-host-box" id="robotHost">
-      <canvas id="robotCanvas"></canvas>
-    </div>
-    <div class="robot-caption">
-      <span>Move cursor anywhere to track gaze &amp; walking motion · Click/Tap to make the robot hop</span>
-      <span>SDF Raymarching &amp; Soft Shadows</span>
-    </div>
+    </section>
+
+    <!-- Card 6: ID Dashboard -->
+    <section class="profile-card-item" id="card-id" data-index="6" data-title="Identity &amp; Verification Dashboard">
+      <img class="card" src="assets/id-dashboard.svg?v=3" alt="Identity &amp; Verification Dashboard">
+    </section>
+
+    <!-- Card 7: Connect -->
+    <section class="profile-card-item" id="card-connect" data-index="7" data-title="Let's Connect &amp; Collaborate">
+      <img class="card" src="assets/connect.svg?v=3" alt="Let's Connect &amp; Collaborate">
+    </section>
+
   </div>
 
+  <!-- Bottom Clickable Badges & Footer -->
   <div class="center badges">
     <a href="https://github.com/kalaiarashisb"><img src="https://img.shields.io/badge/GitHub-kalaiarashisb-180e2f?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
     <a href="https://www.linkedin.com/in/kalaiarashisb/"><img src="https://img.shields.io/badge/LinkedIn-Kalaiarashi%20S%20B-7928ca?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
     <a href="clay_robot.html"><img src="https://img.shields.io/badge/🤖_3D_Clay_Robot-Launch_Live_Companion-d52cb8?style=for-the-badge&logo=webgl&logoColor=white" alt="3D Robot"></a>
     <a href="preview.html"><img src="https://img.shields.io/badge/🌐_Profile_Preview-View_Interactive_Portfolio-22c55e?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Preview"></a>
-    <p style="font-size: 12px; color: #8b949e; margin-top: 16px;">
+  </div>
+
+  <div class="center">
+    <p class="footer-sub">
       Open to Full-Time Software Engineering Roles, Summer Internships &amp; Technical Collaborations.<br>
       Crafted with the Cosmic Aurora Theme · High-Performance Full-Stack &amp; Applied AI Engineering.
     </p>
@@ -1372,11 +1652,152 @@ void main() {
     startWave(1);
     dirty = true;
   });
+  document.getElementById("btnReset")?.addEventListener("click", () => {
+    walkGoal = 0;
+    setAim(0, 0);
+    dirty = true;
+  });
 
   layoutW = host.clientWidth || 800;
   layoutH = host.clientHeight || 600;
   needResize = true;
   requestAnimationFrame(loop);
+})();
+
+// ========================================================
+// PROFILE INTERACTION & TRANSITION CONTROLLER
+// Supports both Continuous Stack and Interactive Card Slider
+// ========================================================
+(function() {
+  const cardsStack = document.getElementById("cardsStack");
+  const cards = Array.from(document.querySelectorAll(".profile-card-item"));
+  const navPills = Array.from(document.querySelectorAll(".nav-pill"));
+  const viewToggle = document.getElementById("viewModeToggle");
+  const viewIcon = document.getElementById("viewModeIcon");
+  const viewLabel = document.getElementById("viewModeLabel");
+  const sliderBar = document.getElementById("sliderControlsBar");
+  const btnPrev = document.getElementById("btnPrevCard");
+  const btnNext = document.getElementById("btnNextCard");
+  const statusTitle = document.getElementById("sliderStatusTitle");
+  const dotsContainer = document.getElementById("sliderDots");
+
+  let isSliderMode = false;
+  let currentIndex = 0;
+
+  // Build Pagination Dots
+  cards.forEach((card, idx) => {
+    const dot = document.createElement("div");
+    dot.className = `slider-dot ${idx === 0 ? "active" : ""}`;
+    dot.title = card.dataset.title || `Card ${idx + 1}`;
+    dot.addEventListener("click", () => goToCard(idx));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = Array.from(document.querySelectorAll(".slider-dot"));
+
+  function updateSliderUI() {
+    cards.forEach((card, idx) => {
+      if (idx === currentIndex) {
+        card.classList.add("is-active");
+      } else {
+        card.classList.remove("is-active");
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentIndex);
+    });
+
+    navPills.forEach((pill, idx) => {
+      pill.classList.toggle("active", idx === currentIndex);
+    });
+
+    const activeCard = cards[currentIndex];
+    const title = activeCard ? activeCard.dataset.title : "";
+    if (statusTitle) {
+      statusTitle.textContent = `Card ${currentIndex + 1} of ${cards.length}: ${title}`;
+    }
+
+    if (btnPrev) btnPrev.disabled = currentIndex === 0;
+    if (btnNext) btnNext.disabled = currentIndex === cards.length - 1;
+
+    // Trigger window resize so WebGL canvas recalculates dimensions smoothly
+    window.dispatchEvent(new Event("resize"));
+  }
+
+  function goToCard(idx) {
+    if (idx < 0 || idx >= cards.length) return;
+    currentIndex = idx;
+    if (isSliderMode) {
+      updateSliderUI();
+      window.scrollTo({ top: sliderBar.offsetTop - 80, behavior: "smooth" });
+    } else {
+      const targetCard = cards[idx];
+      if (targetCard) {
+        const top = targetCard.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    }
+  }
+
+  // Next / Prev button events
+  btnPrev?.addEventListener("click", () => goToCard(currentIndex - 1));
+  btnNext?.addEventListener("click", () => goToCard(currentIndex + 1));
+
+  // Keyboard navigation
+  window.addEventListener("keydown", (e) => {
+    if (!isSliderMode) return;
+    if (e.key === "ArrowRight") goToCard(currentIndex + 1);
+    if (e.key === "ArrowLeft") goToCard(currentIndex - 1);
+  });
+
+  // Nav pills click events
+  navPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const targetIdx = parseInt(pill.dataset.target, 10);
+      goToCard(targetIdx);
+    });
+  });
+
+  // Toggle Stack / Slider View Mode
+  viewToggle?.addEventListener("click", () => {
+    isSliderMode = !isSliderMode;
+    if (isSliderMode) {
+      cardsStack.classList.add("is-slider");
+      sliderBar.style.display = "flex";
+      viewIcon.textContent = "📜";
+      viewLabel.textContent = "Switch to Stack View";
+      updateSliderUI();
+    } else {
+      cardsStack.classList.remove("is-slider");
+      sliderBar.style.display = "none";
+      cards.forEach((card) => card.classList.remove("is-active"));
+      viewIcon.textContent = "🎴";
+      viewLabel.textContent = "Switch to Slider View";
+      window.dispatchEvent(new Event("resize"));
+    }
+  });
+
+  // Scrollspy for Stack View Mode
+  const observerOptions = {
+    root: null,
+    rootMargin: "-20% 0px -60% 0px",
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    if (isSliderMode) return;
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = parseInt(entry.target.dataset.index, 10);
+        navPills.forEach((pill, pIdx) => {
+          pill.classList.toggle("active", pIdx === idx);
+        });
+      }
+    });
+  }, observerOptions);
+
+  cards.forEach((card) => observer.observe(card));
 })();
 </script>
 </body>

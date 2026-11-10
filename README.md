@@ -10,6 +10,9 @@
 
 ![Featured Engineering Deliverables](./assets/projects.svg?v=3)
 
+[![3D Clay Robot Companion](https://img.shields.io/badge/🤖_3D_Clay_Robot_Companion-Launch_Live_AI_Tutor-7928ca?style=for-the-badge&logo=webgl&logoColor=white)](clay_robot.html)
+[![Interactive Portfolio Preview](https://img.shields.io/badge/🌐_Interactive_Portfolio_Preview-Open_Full_Showcase-22c55e?style=for-the-badge&logo=googlechrome&logoColor=white)](preview.html)
+
 ![Identity & Verification Dashboard](./assets/id-dashboard.svg?v=3)
 
 ![Let's Connect & Collaborate](./assets/connect.svg?v=3)
