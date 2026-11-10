@@ -16,6 +16,27 @@
     <stop offset="50%" stop-color="#d52cb8"/>
     <stop offset="100%" stop-color="#efa1df"/>
   </linearGradient>
+  <style>
+    .social-card-link {
+      cursor: pointer;
+      text-decoration: none;
+      outline: none;
+    }
+    .social-card-link:hover .card-bg {
+      stroke: #efa1df;
+      stroke-width: 2px;
+      fill: #2c1647;
+      filter: drop-shadow(0 0 12px rgba(239, 161, 223, 0.45));
+      transition: all 0.25s ease;
+    }
+    .social-card-link:hover .card-bg-green {
+      stroke: #86efac;
+      stroke-width: 2px;
+      fill: #163622;
+      filter: drop-shadow(0 0 12px rgba(134, 239, 172, 0.45));
+      transition: all 0.25s ease;
+    }
+  </style>
   <pattern id="dotGridConn" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
     <circle cx="2" cy="2" r="1" fill="#7948a8" opacity="0.14"/>
   </pattern>
@@ -39,8 +60,9 @@
   <text x="0" y="124" fill="#f8f4ff" font-size="28" font-weight="700">when we build together.</text>
 
   <!-- CARD 1: GITHUB -->
+  <a xlink:href="https://github.com/kalaiarashisb" href="https://github.com/kalaiarashisb" target="_blank" rel="noopener noreferrer" class="social-card-link">
   <g transform="translate(0, 150)">
-    <rect width="555" height="68" rx="14" fill="url(#connect-card)" stroke="#814ba8" stroke-width="1.3"/>
+    <rect class="card-bg" width="555" height="68" rx="14" fill="url(#connect-card)" stroke="#814ba8" stroke-width="1.3"/>
     
     <!-- GitHub Icon Circle -->
     <circle cx="36" cy="34" r="20" fill="#2d174d" stroke="#c6a6f4" stroke-width="1"/>
@@ -58,10 +80,12 @@
       </path>
     </g>
   </g>
+  </a>
 
   <!-- CARD 2: LINKEDIN -->
+  <a xlink:href="https://www.linkedin.com/in/kalaiarashisb/" href="https://www.linkedin.com/in/kalaiarashisb/" target="_blank" rel="noopener noreferrer" class="social-card-link">
   <g transform="translate(0, 230)">
-    <rect width="555" height="68" rx="14" fill="url(#connect-card)" stroke="#814ba8" stroke-width="1.3"/>
+    <rect class="card-bg" width="555" height="68" rx="14" fill="url(#connect-card)" stroke="#814ba8" stroke-width="1.3"/>
     
     <!-- LinkedIn Icon Circle -->
     <circle cx="36" cy="34" r="20" fill="#2d174d" stroke="#c6a6f4" stroke-width="1"/>
@@ -81,10 +105,12 @@
       </path>
     </g>
   </g>
+  </a>
 
   <!-- CARD 3: OPPORTUNITIES & LOCATION -->
+  <a xlink:href="https://www.linkedin.com/in/kalaiarashisb/" href="https://www.linkedin.com/in/kalaiarashisb/" target="_blank" rel="noopener noreferrer" class="social-card-link">
   <g transform="translate(0, 310)">
-    <rect width="555" height="68" rx="14" fill="url(#connect-card)" stroke="#22c55e" stroke-width="1.3"/>
+    <rect class="card-bg card-bg-green" width="555" height="68" rx="14" fill="url(#connect-card)" stroke="#22c55e" stroke-width="1.3"/>
     
     <!-- Briefcase / Globe Icon Circle -->
     <circle cx="36" cy="34" r="20" fill="#142c1d" stroke="#22c55e" stroke-width="1"/>
@@ -106,6 +132,7 @@
       <text x="20" y="16" fill="#86efac" font-size="10.5" font-weight="700">AVAILABLE</text>
     </g>
   </g>
+  </a>
 
 </g>
 </svg>

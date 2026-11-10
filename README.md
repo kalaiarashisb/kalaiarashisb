@@ -1,6 +1,6 @@
 <div align="center">
 
-![Kalaiarashi S B — Hero Introduction](./assets/hero.svg?v=3)
+[![Kalaiarashi S B — Hero Introduction](./assets/hero.svg?v=3)](https://github.com/kalaiarashisb)
 
 ![About Me & Philosophy](./assets/about-life.svg?v=3)
 
@@ -15,7 +15,7 @@
 
 ![Identity & Verification Dashboard](./assets/id-dashboard.svg?v=3)
 
-![Let's Connect & Collaborate](./assets/connect.svg?v=3)
+[![Let's Connect & Collaborate](./assets/connect.svg?v=3)](https://www.linkedin.com/in/kalaiarashisb/)
 
 <!-- ============================================================ -->
 <!-- ACTIONABLE BUTTONS & SOCIAL PROFILES (Placed beneath cards)  -->

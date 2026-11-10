@@ -177,11 +177,27 @@
     border-radius: 26px;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, opacity 0.4s ease;
   }
-  .profile-card-item img.card {
+  .profile-card-item img.card,
+  .profile-card-item object.card {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 1100 / 420;
+    border: none;
     border-radius: 26px;
+  }
+  .connect-hotspots a {
+    transition: all 0.25s ease;
+  }
+  .connect-hotspots a:hover {
+    box-shadow: 0 0 16px rgba(239, 161, 223, 0.45);
+    border: 1.5px solid #efa1df;
+    background: rgba(239, 161, 223, 0.08);
+  }
+  .connect-hotspots a.green-hotspot:hover {
+    box-shadow: 0 0 16px rgba(134, 239, 172, 0.45);
+    border: 1.5px solid #86efac;
+    background: rgba(134, 239, 172, 0.08);
   }
   .profile-card-item:hover {
     transform: translateY(-4px);
@@ -478,8 +494,15 @@
     </section>
 
     <!-- Card 6: Connect -->
-    <section class="profile-card-item" id="card-connect" data-index="6" data-title="Let's Connect &amp; Collaborate">
-      <img class="card" src="assets/connect.svg?v=3" alt="Let's Connect &amp; Collaborate">
+    <section class="profile-card-item" id="card-connect" data-index="6" data-title="Let's Connect &amp; Collaborate" style="position: relative;">
+      <object class="card" type="image/svg+xml" data="assets/connect.svg?v=3" aria-label="Let's Connect &amp; Collaborate">
+        <img class="card" src="assets/connect.svg?v=3" alt="Let's Connect &amp; Collaborate">
+      </object>
+      <div class="connect-hotspots" style="position: absolute; inset: 0; pointer-events: none; border-radius: 26px;">
+        <a href="https://github.com/kalaiarashisb" target="_blank" rel="noopener noreferrer" title="Visit GitHub Profile (kalaiarashisb)" style="position: absolute; left: 44.09%; top: 35.71%; width: 50.45%; height: 16.19%; pointer-events: auto; border-radius: 14px; cursor: pointer; display: block;"></a>
+        <a href="https://www.linkedin.com/in/kalaiarashisb/" target="_blank" rel="noopener noreferrer" title="Connect on LinkedIn (Kalaiarashi S B)" style="position: absolute; left: 44.09%; top: 54.76%; width: 50.45%; height: 16.19%; pointer-events: auto; border-radius: 14px; cursor: pointer; display: block;"></a>
+        <a class="green-hotspot" href="https://www.linkedin.com/in/kalaiarashisb/" target="_blank" rel="noopener noreferrer" title="Open to Opportunities - Reach Out on LinkedIn" style="position: absolute; left: 44.09%; top: 73.81%; width: 50.45%; height: 16.19%; pointer-events: auto; border-radius: 14px; cursor: pointer; display: block;"></a>
+      </div>
     </section>
 
   </div>
